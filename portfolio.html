@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mikaela Joy Pimentel — Portfolio</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter + Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- AOS Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+            },
+            colors: {
+              navy: {
+                950: '#060d1f',
+                900: '#0f172a',
+                800: '#1e293b',
+                700: '#334155',
+                600: '#475569',
+              },
+            },
+            backgroundImage: {
+              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        --accent: #38bdf8;
+        --accent-dim: rgba(56, 189, 248, 0.12);
+        --accent-border: rgba(56, 189, 248, 0.25);
+        --surface: #1e293b;
+        --surface-alt: #162032;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0a1020;
+        color: #e2e8f0;
+        overflow-x: hidden;
+      }
+
+      /* ---- Background ambient glow ---- */
+      .bg-glow {
+        position: fixed;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .glow-1 {
+        width: 600px; height: 600px;
+        top: -200px; left: -200px;
+        background: radial-gradient(circle, rgba(56,189,248,0.06) 0%, transparent 70%);
+        border-radius: 50%;
+      }
+      .glow-2 {
+        width: 500px; height: 500px;
+        bottom: 10%; right: -150px;
+        background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%);
+        border-radius: 50%;
+      }
+
+      /* ---- Navbar ---- */
+      .nav-glass {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background: rgba(9, 15, 30, 0.85);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+
+      /* Logo badge */
+      .logo-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        letter-spacing: -0.02em;
+        color: #f1f5f9;
+      }
+      .logo-icon {
+        width: 34px; height: 34px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: 0.01em;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+      .logo-icon img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: none;
+      }
+      .logo-icon.has-photo span { display: none; }
+      .logo-icon.has-photo img { display: block; }
+      .logo-sub {
+        font-size: 0.65rem;
+        font-weight: 400;
+        color: #64748b;
+        letter-spacing: 0.03em;
+        display: block;
+        margin-top: -2px;
+        font-family: 'Inter', sans-serif;
+      }
+
+      /* Nav link underline */
+      .nav-link {
+        position: relative;
+        color: #94a3b8;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -3px; left: 0;
+        width: 0; height: 1.5px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover { color: #f1f5f9; }
+      .nav-link:hover::after { width: 100%; }
+      .nav-link.active { color: var(--accent); }
+      .nav-link.active::after { width: 100%; }
+
+      /* Hire Me button */
+      .btn-hire {
+        padding: 7px 18px;
+        border-radius: 8px;
+        border: 1px solid var(--accent-border);
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        transition: all 0.25s ease;
+        background: var(--accent-dim);
+      }
+      .btn-hire:hover {
+        background: var(--accent);
+        color: #0f172a;
+        border-color: var(--accent);
+        box-shadow: 0 0 18px rgba(56,189,248,0.3);
+      }
+
+      /* ---- Gradient text ---- */
+      .gradient-text {
+        background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* ---- Hero ---- */
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 14px;
+        border-radius: 100px;
+        background: var(--accent-dim);
+        border: 1px solid var(--accent-border);
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      /* ---- Profile photo ---- */
+      .photo-ring {
+        position: relative;
+        display: inline-block;
+      }
+      .photo-ring::before {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #38bdf8, #6366f1, #38bdf8);
+        background-size: 200% 200%;
+        animation: spin-gradient 4s linear infinite;
+        z-index: -1;
+      }
+      @keyframes spin-gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .photo-inner {
+        width: 160px; height: 160px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 3px solid #0a1020;
+        overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+      .photo-inner img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center top;
+      }
+      .photo-placeholder {
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 6px;
+        color: #475569;
+        font-size: 0.7rem;
+        text-align: center;
+        padding: 12px;
+      }
+
+      /* ---- Buttons ---- */
+      .btn-primary {
+        padding: 12px 28px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #38bdf8, #6366f1);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.875rem;
+        letter-spacing: 0.01em;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(56,189,248,0.2);
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-primary::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255,255,255,0);
+        transition: background 0.2s;
+      }
+      .btn-primary:hover { box-shadow: 0 12px 32px rgba(56,189,248,0.35); transform: translateY(-1px); }
+      .btn-outline {
+        padding: 12px 28px;
+        border-radius: 10px;
+        border: 1px solid #334155;
+        color: #94a3b8;
+        font-weight: 600;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+      }
+      .btn-outline:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-dim);
+      }
+
+      /* ---- Section label ---- */
+      .section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .section-label::before {
+        content: '';
+        display: block;
+        width: 20px; height: 1.5px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      /* ---- Cards ---- */
+      .glass-card {
+        background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.7));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 16px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        backdrop-filter: blur(4px);
+      }
+      .glass-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(56,189,248,0.1);
+        border-color: rgba(56,189,248,0.15);
+      }
+
+      /* ---- Stat cards ---- */
+      .stat-card {
+        background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.6));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 14px;
+        padding: 20px 22px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s, border-color 0.3s;
+      }
+      .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .stat-card:hover { transform: translateY(-2px); border-color: rgba(56,189,248,0.2); }
+      .stat-card:hover::before { opacity: 1; }
+
+      /* ---- Skill badge ---- */
+      .skill-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 12px;
+        border-radius: 100px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: #94a3b8;
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: default;
+        transition: all 0.2s ease;
+      }
+      .skill-badge:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #0f172a;
+        transform: scale(1.04);
+      }
+
+      /* ---- Project card ---- */
+      .project-card {
+        background: linear-gradient(145deg, rgba(22,32,50,0.95), rgba(15,23,42,0.9));
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .project-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(56,189,248,0.12);
+      }
+      .project-stripe {
+        height: 3px;
+        background: linear-gradient(90deg, #38bdf8, #6366f1, #a78bfa);
+      }
+
+      /* ---- Cert card ---- */
+      .cert-card {
+        background: linear-gradient(145deg, rgba(22,32,50,0.9), rgba(15,23,42,0.7));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        transition: transform 0.25s, border-color 0.25s;
+      }
+      .cert-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(56,189,248,0.18);
+      }
+
+      /* ---- Timeline ---- */
+      .timeline-dot-active {
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(99,102,241,0.2));
+        border: 2px solid rgba(56,189,248,0.4);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0; z-index: 10;
+      }
+      .timeline-dot-inactive {
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        background: rgba(30,41,59,0.8);
+        border: 1px solid rgba(255,255,255,0.08);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0; z-index: 10;
+      }
+      .timeline-line {
+        position: absolute;
+        left: 20px; top: 42px;
+        bottom: 0; width: 1px;
+        background: linear-gradient(to bottom, rgba(56,189,248,0.3), rgba(56,189,248,0.05));
+      }
+
+      /* ---- Divider ---- */
+      .fancy-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(56,189,248,0.2), rgba(99,102,241,0.15), transparent);
+        margin: 0 auto;
+        max-width: 1000px;
+      }
+
+      /* ---- Contact card ---- */
+      .contact-card {
+        background: linear-gradient(145deg, rgba(22,32,50,0.9), rgba(15,23,42,0.7));
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        text-decoration: none;
+      }
+      .contact-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(56,189,248,0.2);
+        box-shadow: 0 16px 32px rgba(0,0,0,0.3);
+      }
+
+      /* ---- Scrollbar ---- */
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: #060d1f; }
+      ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+
+      /* ---- Animations ---- */
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      .float { animation: float 4s ease-in-out infinite; }
+
+      @keyframes pulse-ring {
+        0% { box-shadow: 0 0 0 0 rgba(56,189,248,0.3); }
+        70% { box-shadow: 0 0 0 12px rgba(56,189,248,0); }
+        100% { box-shadow: 0 0 0 0 rgba(56,189,248,0); }
+      }
+      .pulse-ring { animation: pulse-ring 2.5s infinite; }
+
+      /* ---- Noise texture overlay ---- */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.4;
+      }
+
+      section, nav, footer { position: relative; z-index: 1; }
+    </style>
+  </head>
+
+  <body class="antialiased">
+
+    <!-- Ambient glows -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-glass transition-all duration-300">
+      <div class="max-w-6xl mx-auto px-6 py-3.5 flex items-center justify-between">
+
+        <!-- Logo -->
+        <a href="#hero" class="logo-badge group">
+          <div class="logo-icon" id="nav-logo-icon">
+            <span>MJP</span>
+            <img id="nav-logo-photo" src="" alt="MJP" />
+          </div>
+          <div>
+            <span>Mikaela Joy</span>
+            <span class="logo-sub">BSIT Student &amp; Tech Intern</span>
+          </div>
+        </a>
+
+        <!-- Desktop nav -->
+        <div class="hidden md:flex items-center gap-7">
+          <a href="#about"        class="nav-link">About</a>
+          <a href="#skills"       class="nav-link">Skills</a>
+          <a href="#projects"     class="nav-link">Projects</a>
+          <a href="#certificates" class="nav-link">Certificates</a>
+          <a href="#education"    class="nav-link">Education</a>
+          <a href="#contact"      class="nav-link">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="#contact" class="hidden md:inline-flex btn-hire">Hire Me</a>
+          <!-- Mobile toggle -->
+          <button id="menu-btn" class="md:hidden w-9 h-9 rounded-lg bg-white/5 border border-white/08 flex items-center justify-center text-slate-400 hover:text-sky-400 transition-colors" aria-label="Menu">
+            <svg id="icon-open" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <svg id="icon-close" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-white/05">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
+          <a href="#about"        class="px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:bg-white/05 hover:text-sky-400 transition-all" onclick="closeMobileMenu()">About</a>
+          <a href="#skills"       class="px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:bg-white/05 hover:text-sky-400 transition-all" onclick="closeMobileMenu()">Skills</a>
+          <a href="#projects"     class="px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:bg-white/05 hover:text-sky-400 transition-all" onclick="closeMobileMenu()">Projects</a>
+          <a href="#certificates" class="px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:bg-white/05 hover:text-sky-400 transition-all" onclick="closeMobileMenu()">Certificates</a>
+          <a href="#education"    class="px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:bg-white/05 hover:text-sky-400 transition-all" onclick="closeMobileMenu()">Education</a>
+          <a href="#contact"      class="px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:bg-white/05 hover:text-sky-400 transition-all" onclick="closeMobileMenu()">Contact</a>
+          <div class="pt-2 border-t border-white/05 mt-1">
+            <a href="#contact" class="block px-3 py-2.5 rounded-lg text-sm text-sky-400 font-semibold" onclick="closeMobileMenu()">Hire Me →</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero" class="min-h-screen flex items-center px-6 pt-24 pb-16 relative">
+      <!-- Grid pattern background -->
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(#38bdf8 1px, transparent 1px), linear-gradient(90deg, #38bdf8 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+      <div class="max-w-6xl mx-auto w-full">
+        <div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+
+          <!-- Left: text -->
+          <div class="flex-1 text-center lg:text-left">
+            <div class="flex justify-center lg:justify-start mb-6" data-aos="fade-up" data-aos-duration="500">
+              <span class="hero-tag">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse inline-block"></span>
+                Available for Internship
+              </span>
+            </div>
+
+            <h1
+              class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-5"
+              data-aos="fade-up" data-aos-duration="600" data-aos-delay="80"
+            >
+              Hi, I'm <br/>
+              <span class="gradient-text">Mikaela Joy</span><br/>
+              <span class="text-slate-300">Pimentel</span>
+            </h1>
+
+            <p
+              class="text-slate-400 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8"
+              data-aos="fade-up" data-aos-delay="160"
+            >
+              4th Year BSIT Student &amp; Aspiring Venture Building Intern —
+              turning ideas into working web products through code, design, and collaboration.
+            </p>
+
+            <!-- Role tags -->
+            <div
+              class="flex flex-wrap justify-center lg:justify-start gap-2 mb-10"
+              data-aos="fade-up" data-aos-delay="220"
+            >
+              <span class="px-3 py-1 rounded-full text-xs font-medium bg-sky-400/10 text-sky-400 border border-sky-400/20">Full-Stack Developer</span>
+              <span class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-400/10 text-indigo-400 border border-indigo-400/20">UI/UX Designer</span>
+              <span class="px-3 py-1 rounded-full text-xs font-medium bg-violet-400/10 text-violet-400 border border-violet-400/20">AI &amp; Security Enthusiast</span>
+            </div>
+
+            <div
+              class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+              data-aos="fade-up" data-aos-delay="280"
+            >
+              <a href="#projects" class="btn-primary w-full sm:w-auto text-center">View My Work</a>
+              <a href="#contact"  class="btn-outline w-full sm:w-auto text-center">Contact Me</a>
+            </div>
+
+            <!-- Social quick links -->
+            <div class="flex items-center justify-center lg:justify-start gap-4 mt-8" data-aos="fade-up" data-aos-delay="340">
+              <a href="https://github.com/elayyy913" target="_blank" rel="noopener noreferrer"
+                 class="w-9 h-9 rounded-lg bg-white/05 border border-white/08 flex items-center justify-center text-slate-500 hover:text-sky-400 hover:border-sky-400/30 transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+              <a href="https://linkedin.com/in/mikaela-joy-pimentel" target="_blank" rel="noopener noreferrer"
+                 class="w-9 h-9 rounded-lg bg-white/05 border border-white/08 flex items-center justify-center text-slate-500 hover:text-sky-400 hover:border-sky-400/30 transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="mailto:mikaelasalazarpimentel09@gmail.com"
+                 class="w-9 h-9 rounded-lg bg-white/05 border border-white/08 flex items-center justify-center text-slate-500 hover:text-sky-400 hover:border-sky-400/30 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: profile photo -->
+          <div class="flex-shrink-0 flex flex-col items-center gap-5" data-aos="fade-left" data-aos-delay="200">
+
+            <!-- Hidden file input -->
+            <input type="file" id="photo-input" accept="image/*" class="hidden" />
+
+            <div class="relative group">
+              <div class="photo-ring float">
+                <div class="photo-inner pulse-ring" id="photo-container">
+
+                  <!-- Placeholder (shown when no photo) -->
+                  <div class="photo-placeholder" id="photo-placeholder">
+                    <svg class="w-10 h-10 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <span class="text-slate-600 text-xs leading-tight text-center">Click to add<br/>your photo</span>
+                  </div>
+
+                  <!-- Uploaded photo (hidden until a photo is chosen) -->
+                  <img id="profile-photo" src="" alt="Mikaela Joy Pimentel"
+                       class="hidden w-full h-full object-cover object-top" />
+
+                </div>
+              </div>
+
+              <!-- Overlay: click to change or remove (appears on hover when photo exists) -->
+              <div id="photo-overlay"
+                   class="absolute inset-0 rounded-full flex flex-col items-center justify-center gap-1 opacity-0 pointer-events-none transition-opacity duration-200 z-20"
+                   style="background: rgba(9,15,30,0.7); border-radius: 50%;">
+                <button id="btn-change-photo"
+                        class="text-white text-xs font-semibold flex items-center gap-1 hover:text-sky-400 transition-colors">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  Change
+                </button>
+                <button id="btn-remove-photo"
+                        class="text-slate-400 text-xs hover:text-red-400 transition-colors flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                  Remove
+                </button>
+              </div>
+
+              <!-- Upload prompt badge (shown when no photo) -->
+              <button id="btn-upload-photo"
+                      class="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-sky-400 text-navy-900 shadow-lg shadow-sky-400/30 hover:bg-sky-300 transition-all whitespace-nowrap z-20">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                </svg>
+                Upload Photo
+              </button>
+            </div>
+
+            <!-- Mini stats below photo -->
+            <div class="flex gap-3">
+              <div class="text-center px-4 py-2.5 rounded-xl bg-white/04 border border-white/06">
+                <p class="text-sky-400 font-bold text-lg leading-none font-display">4th</p>
+                <p class="text-slate-500 text-xs mt-1">Year</p>
+              </div>
+              <div class="text-center px-4 py-2.5 rounded-xl bg-white/04 border border-white/06">
+                <p class="text-sky-400 font-bold text-lg leading-none font-display">7+</p>
+                <p class="text-slate-500 text-xs mt-1">Certs</p>
+              </div>
+              <div class="text-center px-4 py-2.5 rounded-xl bg-white/04 border border-white/06">
+                <p class="text-sky-400 font-bold text-lg leading-none font-display">1</p>
+                <p class="text-slate-500 text-xs mt-1">Project</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Scroll cue -->
+        <div class="flex justify-center mt-16 lg:mt-20" data-aos="fade-up" data-aos-delay="500">
+          <a href="#about" class="flex flex-col items-center gap-2 text-slate-600 hover:text-sky-400 transition-colors group">
+            <span class="text-xs tracking-widest uppercase font-medium">Scroll</span>
+            <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="fancy-divider"></div>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="py-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div data-aos="fade-up">
+          <span class="section-label">01 — About Me</span>
+          <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight mt-1 mb-14">Who I Am</h2>
+        </div>
+
+        <div class="grid lg:grid-cols-5 gap-14 items-start">
+          <!-- Bio text -->
+          <div class="lg:col-span-3 space-y-5 text-slate-400 leading-relaxed text-[0.95rem]" data-aos="fade-right" data-aos-delay="100">
+            <p>
+              I'm a <span class="text-slate-200 font-semibold">fourth-year Bachelor of Science in Information Technology</span> student at
+              Our Lady of Lourdes College Foundation. I have a strong interest in building web products that solve real, meaningful problems.
+            </p>
+            <p>
+              I <span class="text-slate-200 font-semibold">built a full-stack capstone system from scratch</span> for a real client —
+              the Alawihao Barangay Health Center — covering everything from database design and UI/UX to testing, using PHP, MySQL, and JavaScript.
+            </p>
+            <p>
+              I'm <span class="text-slate-200 font-semibold">curious about AI and digital security</span>, comfortable finding and fixing bugs,
+              and I thrive working alongside product and design teammates. I learn fast, take feedback well, and always look for ways to improve.
+            </p>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-3 py-1 rounded-lg text-xs bg-white/04 border border-white/07 text-slate-400">📍 Las Piñas City, PH</span>
+              <span class="px-3 py-1 rounded-lg text-xs bg-white/04 border border-white/07 text-slate-400">🎓 BSIT · Our Lady of Lourdes College</span>
+              <span class="px-3 py-1 rounded-lg text-xs bg-white/04 border border-white/07 text-slate-400">💬 English &amp; Filipino</span>
+            </div>
+
+            <!-- Links -->
+            <div class="flex flex-wrap gap-4 pt-3">
+              <a href="https://github.com/elayyy913" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-2 text-sm text-sky-400 hover:text-sky-300 font-medium transition-colors group">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                github.com/elayyy913 <span class="group-hover:translate-x-0.5 transition-transform inline-block">→</span>
+              </a>
+              <a href="https://linkedin.com/in/mikaela-joy-pimentel" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-2 text-sm text-sky-400 hover:text-sky-300 font-medium transition-colors group">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn <span class="group-hover:translate-x-0.5 transition-transform inline-block">→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Stat cards -->
+          <div class="lg:col-span-2 grid grid-cols-2 gap-3" data-aos="fade-left" data-aos-delay="150">
+            <div class="stat-card col-span-2">
+              <p class="text-4xl font-bold font-display gradient-text">BSIT</p>
+              <p class="text-slate-400 text-sm mt-1.5 leading-snug">Bachelor of Science in<br/>Information Technology</p>
+            </div>
+            <div class="stat-card">
+              <p class="text-3xl font-bold font-display text-sky-400">4<span class="text-xl">th</span></p>
+              <p class="text-slate-500 text-xs mt-1.5 leading-snug">Year Student</p>
+            </div>
+            <div class="stat-card">
+              <p class="text-3xl font-bold font-display text-sky-400">7</p>
+              <p class="text-slate-500 text-xs mt-1.5 leading-snug">Certificates (2026)</p>
+            </div>
+            <div class="stat-card col-span-2">
+              <p class="text-3xl font-bold font-display text-sky-400">1</p>
+              <p class="text-slate-500 text-xs mt-1.5 leading-snug">Full-Stack Capstone Built for a Real Client</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="fancy-divider"></div>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills" class="py-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div data-aos="fade-up">
+          <span class="section-label">02 — Skills</span>
+          <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight mt-1 mb-14">What I Work With</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-5">
+
+          <!-- Design -->
+          <div class="glass-card p-7" data-aos="fade-up" data-aos-delay="80">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-9 h-9 rounded-xl bg-sky-400/10 border border-sky-400/15 flex items-center justify-center">
+                <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <h3 class="font-semibold text-slate-100 font-display">Prototyping &amp; Design</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-badge">Figma</span>
+              <span class="skill-badge">Canva</span>
+              <span class="skill-badge">Adobe</span>
+              <span class="skill-badge">Lucidchart</span>
+              <span class="skill-badge">Design Thinking</span>
+              <span class="skill-badge">Responsive UI</span>
+              <span class="skill-badge">Accessibility</span>
+            </div>
+          </div>
+
+          <!-- Frontend -->
+          <div class="glass-card p-7" data-aos="fade-up" data-aos-delay="130">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-9 h-9 rounded-xl bg-indigo-400/10 border border-indigo-400/15 flex items-center justify-center">
+                <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              </div>
+              <h3 class="font-semibold text-slate-100 font-display">Front-End Development</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-badge">HTML / CSS</span>
+              <span class="skill-badge">JavaScript</span>
+              <span class="skill-badge">Tailwind CSS</span>
+              <span class="skill-badge">Bootstrap</span>
+              <span class="skill-badge">Responsive Design</span>
+            </div>
+          </div>
+
+          <!-- Backend -->
+          <div class="glass-card p-7" data-aos="fade-up" data-aos-delay="180">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-9 h-9 rounded-xl bg-violet-400/10 border border-violet-400/15 flex items-center justify-center">
+                <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"/></svg>
+              </div>
+              <h3 class="font-semibold text-slate-100 font-display">Back-End Development</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-badge">PHP</span>
+              <span class="skill-badge">Laravel</span>
+              <span class="skill-badge">Python</span>
+              <span class="skill-badge">C#</span>
+              <span class="skill-badge">C++</span>
+              <span class="skill-badge">Node.js</span>
+              <span class="skill-badge">Server-side Scripting</span>
+            </div>
+          </div>
+
+          <!-- Databases & Tools -->
+          <div class="glass-card p-7" data-aos="fade-up" data-aos-delay="230">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-9 h-9 rounded-xl bg-emerald-400/10 border border-emerald-400/15 flex items-center justify-center">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+              </div>
+              <h3 class="font-semibold text-slate-100 font-display">Databases &amp; Dev Tools</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-badge">MySQL</span>
+              <span class="skill-badge">PostgreSQL</span>
+              <span class="skill-badge">MongoDB</span>
+              <span class="skill-badge">Git &amp; GitHub</span>
+              <span class="skill-badge">Postman</span>
+              <span class="skill-badge">XAMPP</span>
+              <span class="skill-badge">DBeaver</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="fancy-divider"></div>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects" class="py-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div data-aos="fade-up">
+          <span class="section-label">03 — Projects</span>
+          <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight mt-1 mb-14">What I've Built</h2>
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="project-stripe"></div>
+          <div class="p-8 md:p-10">
+            <div class="flex flex-wrap items-start justify-between gap-5 mb-6">
+              <div>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-bold text-sky-400 bg-sky-400/10 border border-sky-400/20 uppercase tracking-wider">Capstone · 2026</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium text-green-400 bg-green-400/10 border border-green-400/20">Completed</span>
+                </div>
+                <h3 class="font-display text-xl md:text-2xl font-bold text-slate-100 leading-snug">
+                  Online Vaccination Monitoring and<br class="hidden md:block"/>Record Management System for Infants
+                </h3>
+                <p class="text-slate-500 text-sm mt-2 flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  Alawihao Barangay Health Center
+                </p>
+              </div>
+              <a href="https://github.com/elayyy913" target="_blank" rel="noopener noreferrer"
+                 class="w-10 h-10 rounded-xl bg-white/05 border border-white/08 flex items-center justify-center text-slate-400 hover:text-sky-400 hover:border-sky-400/25 transition-all shrink-0">
+                <svg class="w-4.5 h-4.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+
+            <!-- Stack -->
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">PHP</span>
+              <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">MySQL</span>
+              <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">JavaScript</span>
+              <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Bootstrap</span>
+              <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20">Figma</span>
+              <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20">XAMPP</span>
+            </div>
+
+            <!-- Highlights grid -->
+            <div class="grid md:grid-cols-2 gap-3">
+              <div class="flex gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/05">
+                <span class="text-sky-400 shrink-0 mt-0.5 font-bold">▸</span>
+                <p class="text-slate-400 text-sm leading-relaxed">Built a full-stack web app managing EMR, vaccine inventories, activity logs, and scheduling for health workers.</p>
+              </div>
+              <div class="flex gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/05">
+                <span class="text-sky-400 shrink-0 mt-0.5 font-bold">▸</span>
+                <p class="text-slate-400 text-sm leading-relaxed">Designed accessible, responsive interfaces in Figma and Bootstrap using Design Thinking from the Annual Reverse Pitching Competition.</p>
+              </div>
+              <div class="flex gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/05">
+                <span class="text-sky-400 shrink-0 mt-0.5 font-bold">▸</span>
+                <p class="text-slate-400 text-sm leading-relaxed">Implemented JS-driven features: calendar scheduling and batch/expiry alerts for vaccine stock management.</p>
+              </div>
+              <div class="flex gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/05">
+                <span class="text-sky-400 shrink-0 mt-0.5 font-bold">▸</span>
+                <p class="text-slate-400 text-sm leading-relaxed">Applied data security and compliance practices aligned with the Data Privacy Act of 2012.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="fancy-divider"></div>
+
+    <!-- ===== CERTIFICATES ===== -->
+    <section id="certificates" class="py-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div data-aos="fade-up">
+          <span class="section-label">04 — Certificates</span>
+          <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight mt-1 mb-14">Continuous Learning</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+
+          <div class="cert-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="w-10 h-10 rounded-xl bg-sky-400/10 border border-sky-400/15 flex items-center justify-center shrink-0">
+              <svg class="w-4.5 h-4.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-100 text-sm font-semibold leading-snug">Introduction to AI in Azure</p>
+              <p class="text-slate-500 text-xs mt-1.5">BlackStride Cyber · Aug 2026</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-aos="fade-up" data-aos-delay="110">
+            <div class="w-10 h-10 rounded-xl bg-sky-400/10 border border-sky-400/15 flex items-center justify-center shrink-0">
+              <svg class="w-4.5 h-4.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-100 text-sm font-semibold leading-snug">Navigating the Future: Intro to AI and Digital Security</p>
+              <p class="text-slate-500 text-xs mt-1.5">DICT Eastern Samar · Aug 2026</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-aos="fade-up" data-aos-delay="140">
+            <div class="w-10 h-10 rounded-xl bg-indigo-400/10 border border-indigo-400/15 flex items-center justify-center shrink-0">
+              <svg class="w-4.5 h-4.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-100 text-sm font-semibold leading-snug">Phase 3: Design Thinking — Annual Reverse Pitching Competition 2026</p>
+              <p class="text-slate-500 text-xs mt-1.5">DICT Region X · Aug 2026</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-aos="fade-up" data-aos-delay="170">
+            <div class="w-10 h-10 rounded-xl bg-indigo-400/10 border border-indigo-400/15 flex items-center justify-center shrink-0">
+              <svg class="w-4.5 h-4.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-100 text-sm font-semibold leading-snug">Intro to Cloud Security, Compliance and Identity</p>
+              <p class="text-slate-500 text-xs mt-1.5">BlackStride Cyber · Aug 2026</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-10 h-10 rounded-xl bg-violet-400/10 border border-violet-400/15 flex items-center justify-center shrink-0">
+              <svg class="w-4.5 h-4.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-100 text-sm font-semibold leading-snug">Shielding Your Digital Storefront — AI-Driven Phishing &amp; Business Account Security</p>
+              <p class="text-slate-500 text-xs mt-1.5">DOST Rizal · Aug 2026</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-aos="fade-up" data-aos-delay="230">
+            <div class="w-10 h-10 rounded-xl bg-violet-400/10 border border-violet-400/15 flex items-center justify-center shrink-0">
+              <svg class="w-4.5 h-4.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-100 text-sm font-semibold leading-snug">Press Start: Game Development — Being a Hobbyist Game Dev in the Modern Era</p>
+              <p class="text-slate-500 text-xs mt-1.5">DICT Regional Office VIII · Aug 2026</p>
+            </div>
+          </div>
+
+          <div class="cert-card sm:col-span-2" data-aos="fade-up" data-aos-delay="260">
+            <div class="w-10 h-10 rounded-xl bg-emerald-400/10 border border-emerald-400/15 flex items-center justify-center shrink-0">
+              <svg class="w-4.5 h-4.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-100 text-sm font-semibold leading-snug">Viewing of Exhibits — 2026 Regional Science and Technology Week in Bicol</p>
+              <p class="text-slate-500 text-xs mt-1.5">DOST Regional Office V · Aug 2026</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="fancy-divider"></div>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education" class="py-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div data-aos="fade-up">
+          <span class="section-label">05 — Education</span>
+          <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight mt-1 mb-14">Academic Background</h2>
+        </div>
+
+        <div class="relative pl-0 md:pl-2">
+          <div class="timeline-line hidden md:block"></div>
+
+          <div class="space-y-6">
+
+            <div class="flex gap-5 items-start" data-aos="fade-up" data-aos-delay="80">
+              <div class="timeline-dot-active hidden md:flex">
+                <div class="w-3 h-3 rounded-full bg-sky-400"></div>
+              </div>
+              <div class="glass-card p-6 flex-1">
+                <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                  <div>
+                    <h3 class="font-display font-bold text-slate-100 text-lg">Bachelor of Science in Information Technology</h3>
+                    <p class="text-slate-400 text-sm mt-1">Our Lady of Lourdes College Foundation</p>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-xs font-semibold text-sky-400 bg-sky-400/10 border border-sky-400/20 whitespace-nowrap">2023 – Present</span>
+                </div>
+                <div class="flex items-center gap-2 mt-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                  <span class="text-green-400 text-xs font-medium">Currently enrolled · Fourth Year</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-5 items-start" data-aos="fade-up" data-aos-delay="130">
+              <div class="timeline-dot-inactive hidden md:flex">
+                <div class="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
+              </div>
+              <div class="glass-card p-6 flex-1">
+                <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                  <div>
+                    <h3 class="font-display font-bold text-slate-100 text-lg">Senior High School — STEM</h3>
+                    <p class="text-slate-400 text-sm mt-1">Mabini Colleges Inc.</p>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-xs font-semibold text-slate-400 bg-white/05 border border-white/08 whitespace-nowrap">2021 – 2023</span>
+                </div>
+                <p class="text-slate-500 text-xs mt-1">Science, Technology, Engineering, and Mathematics</p>
+              </div>
+            </div>
+
+            <div class="flex gap-5 items-start" data-aos="fade-up" data-aos-delay="180">
+              <div class="timeline-dot-inactive hidden md:flex">
+                <div class="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
+              </div>
+              <div class="glass-card p-6 flex-1">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <h3 class="font-display font-bold text-slate-100 text-lg">Junior High School</h3>
+                    <p class="text-slate-400 text-sm mt-1">Alawihao National High School</p>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-xs font-semibold text-slate-400 bg-white/05 border border-white/08 whitespace-nowrap">2017 – 2020</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="fancy-divider"></div>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="py-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div data-aos="fade-up">
+          <span class="section-label">06 — Contact</span>
+          <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight mt-1 mb-4">Let's Work Together</h2>
+        </div>
+        <p class="text-slate-400 max-w-xl mb-14 text-[0.95rem] leading-relaxed" data-aos="fade-up" data-aos-delay="80">
+          I'm open to internship opportunities, collaborations, and exciting projects.
+          Whether you have a role or just want to connect — feel free to reach out.
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-4" data-aos="fade-up" data-aos-delay="140">
+
+          <a href="mailto:mikaelasalazarpimentel09@gmail.com" class="contact-card group">
+            <div class="w-11 h-11 rounded-xl bg-sky-400/10 border border-sky-400/15 flex items-center justify-center group-hover:bg-sky-400/20 transition-colors">
+              <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-1">Email</p>
+              <p class="text-slate-300 text-sm font-medium break-all leading-snug">mikaelasalazarpimentel09<br/>@gmail.com</p>
+            </div>
+            <span class="text-sky-400 text-xs font-semibold mt-auto flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">Send message →</span>
+          </a>
+
+          <a href="https://github.com/elayyy913" target="_blank" rel="noopener noreferrer" class="contact-card group">
+            <div class="w-11 h-11 rounded-xl bg-sky-400/10 border border-sky-400/15 flex items-center justify-center group-hover:bg-sky-400/20 transition-colors">
+              <svg class="w-5 h-5 text-sky-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-1">GitHub</p>
+              <p class="text-slate-300 text-sm font-medium">github.com/elayyy913</p>
+            </div>
+            <span class="text-sky-400 text-xs font-semibold mt-auto flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">View profile →</span>
+          </a>
+
+          <a href="https://linkedin.com/in/mikaela-joy-pimentel" target="_blank" rel="noopener noreferrer" class="contact-card group">
+            <div class="w-11 h-11 rounded-xl bg-sky-400/10 border border-sky-400/15 flex items-center justify-center group-hover:bg-sky-400/20 transition-colors">
+              <svg class="w-5 h-5 text-sky-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-1">LinkedIn</p>
+              <p class="text-slate-300 text-sm font-medium">mikaela-joy-pimentel</p>
+            </div>
+            <span class="text-sky-400 text-xs font-semibold mt-auto flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">Connect →</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="py-8 px-6 border-t border-white/[0.05]">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="logo-icon" id="footer-logo-icon" style="width:28px;height:28px;font-size:0.6rem;">
+            <span>MJP</span>
+            <img id="footer-logo-photo" src="" alt="MJP" />
+          </div>
+          <p class="text-slate-600 text-sm">© 2026 Mikaela Joy Salazar Pimentel</p>
+        </div>
+        <a href="#hero" class="text-slate-600 hover:text-sky-400 transition-colors text-sm flex items-center gap-1.5">
+          Back to top
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+        </a>
+      </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+      // Init AOS
+      AOS.init({ duration: 650, easing: 'ease-out-cubic', once: true, offset: 70 });
+
+      // Mobile menu
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconOpen = document.getElementById('icon-open');
+      const iconClose = document.getElementById('icon-close');
+
+      menuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        iconOpen.classList.toggle('hidden', !isHidden);
+        iconClose.classList.toggle('hidden', isHidden);
+      });
+
+      function closeMobileMenu() {
+        mobileMenu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      }
+
+      // Navbar shrink on scroll
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          navbar.classList.add('py-0');
+        } else {
+          navbar.classList.remove('py-0');
+        }
+      });
+
+      // ---- Profile Photo Upload ----
+      const photoInput       = document.getElementById('photo-input');
+      const profilePhoto     = document.getElementById('profile-photo');
+      const photoPlaceholder = document.getElementById('photo-placeholder');
+      const photoOverlay     = document.getElementById('photo-overlay');
+      const btnUpload        = document.getElementById('btn-upload-photo');
+      const btnChange        = document.getElementById('btn-change-photo');
+      const btnRemove        = document.getElementById('btn-remove-photo');
+      const photoContainer   = document.getElementById('photo-container');
+
+      const navLogoIcon      = document.getElementById('nav-logo-icon');
+      const navLogoPhoto     = document.getElementById('nav-logo-photo');
+      const footerLogoIcon   = document.getElementById('footer-logo-icon');
+      const footerLogoPhoto  = document.getElementById('footer-logo-photo');
+
+      function syncNavLogo(src) {
+        if (src) {
+          navLogoPhoto.src = src;
+          navLogoIcon.classList.add('has-photo');
+          footerLogoPhoto.src = src;
+          footerLogoIcon.classList.add('has-photo');
+        } else {
+          navLogoPhoto.src = '';
+          navLogoIcon.classList.remove('has-photo');
+          footerLogoPhoto.src = '';
+          footerLogoIcon.classList.remove('has-photo');
+        }
+      }
+
+      function showPhoto(src) {
+        profilePhoto.src = src;
+        profilePhoto.classList.remove('hidden');
+        photoPlaceholder.classList.add('hidden');
+        btnUpload.classList.add('hidden');
+        photoContainer.classList.add('has-photo');
+        syncNavLogo(src);
+      }
+
+      function clearPhoto() {
+        profilePhoto.src = '';
+        profilePhoto.classList.add('hidden');
+        photoPlaceholder.classList.remove('hidden');
+        btnUpload.classList.remove('hidden');
+        photoOverlay.style.opacity = '0';
+        photoOverlay.style.pointerEvents = 'none';
+        photoContainer.classList.remove('has-photo');
+        syncNavLogo(null);
+        localStorage.removeItem('portfolio_photo');
+      }
+
+      // Load saved photo from localStorage on page load
+      const savedPhoto = localStorage.getItem('portfolio_photo');
+      if (savedPhoto) showPhoto(savedPhoto);
+
+      // Click "Upload Photo" badge → trigger file picker
+      btnUpload.addEventListener('click', () => photoInput.click());
+
+      // Click "Change" inside overlay → trigger file picker
+      btnChange.addEventListener('click', () => photoInput.click());
+
+      // Remove photo
+      btnRemove.addEventListener('click', clearPhoto);
+
+      // File selected
+      photoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const dataUrl = ev.target.result;
+          showPhoto(dataUrl);
+          try {
+            localStorage.setItem('portfolio_photo', dataUrl);
+          } catch (err) {
+            console.warn('Could not save photo to localStorage:', err);
+          }
+        };
+        reader.readAsDataURL(file);
+        e.target.value = '';
+      });
+
+      // Hover overlay — show when has-photo
+      photoContainer.addEventListener('mouseenter', () => {
+        if (photoContainer.classList.contains('has-photo')) {
+          photoOverlay.style.opacity = '1';
+          photoOverlay.style.pointerEvents = 'auto';
+        }
+      });
+      photoContainer.addEventListener('mouseleave', () => {
+        photoOverlay.style.opacity = '0';
+        photoOverlay.style.pointerEvents = 'none';
+      });
+
+      // Click placeholder to open picker
+      photoPlaceholder.style.cursor = 'pointer';
+      photoPlaceholder.addEventListener('click', () => photoInput.click());
+
+      // ---- Active nav highlight on scroll ----
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('nav a.nav-link');
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + entry.target.id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, { threshold: 0.35 });
+
+      sections.forEach(s => sectionObserver.observe(s));
+    </script>
+
+  </body>
+</html>

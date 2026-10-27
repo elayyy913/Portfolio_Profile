@@ -1,0 +1,13 @@
+{
+  "name": " Mikaela Joy Salazar Pimentel",
+  "bio": "Maikling kwento tungkol sa sarili mo.",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "contact": {
+    "email": "youremail@example.com",
+    "github": "https://github.com/yourusername"
+  }
+}
